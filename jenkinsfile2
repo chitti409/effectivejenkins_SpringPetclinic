@@ -32,10 +32,13 @@ stage('Code Quality') {
             steps {
                 sh 'mvn clean package'
                 junit '**/target/surefire-reports/TEST-*.xml'
-                jacoco execPattern: 'target/jacoco.exec'
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
         }
+        
+        stage ("Extract test results") {
+    cobertura coberturaReportFile: '**/target/surefire-reports/coverage.xml'
+}
    //     stage('Deploy') {
  //         steps {
    //         input 'Do you approve the deployment?'
