@@ -36,7 +36,7 @@ stage('Code Quality') {
             }
         }
         
-        stage ('Extract test results') {
+        stage('Extract test results') {
     cobertura coberturaReportFile: '**/target/surefire-reports/coverage.xml'
 }
    //     stage('Deploy') {
