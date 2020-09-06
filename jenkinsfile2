@@ -38,7 +38,6 @@ stage('Code Quality') {
         }
         
           
-}
    //     stage('Deploy') {
  //         steps {
    //         input 'Do you approve the deployment?'
