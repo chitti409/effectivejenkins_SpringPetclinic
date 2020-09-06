@@ -6,12 +6,16 @@ pipeline {
             git 'https://github.com/cbabu85/effectivejenkins_SpringPetclinic.git'
           }
         }
-        stage('Code Analysis') {
-         def scannerHome = tool 'SonarQube Scanner';
-         withSonarQubeEnv('Sonar 8.3.1') {
-         bat "${scannerHome}/bin/sonar-scanner -Dsonar.host.url=http://34.126.89.141:9000 -Dsonar.login=cb4e2ac86c60200796a7cf866c2a60955a505db2 -Dsonar.projectVersion=1.0 -Dsonar.projectKey=PetClinic_Key -Dsonar.sources=src -Dsonar.java.binaries=."
-          }
-     } 
+       stage('Sonarqube analysis') {
+    steps {
+        script {
+            scannerHome = tool 'SonarScanner';
+        }
+        withSonarQubeEnv('SonarQube 8.3.1') {
+            bat "${scannerHome}/bin/sonar-scanner.bat" 
+        }
+    }
+}
         
         stage('Build') {
             agent { docker 'maven:3.5-alpine' }
