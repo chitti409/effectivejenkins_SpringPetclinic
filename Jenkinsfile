@@ -1,9 +1,9 @@
 pipeline {
-    agent { label 'linux' }
+    agent { label 'master' }
     stages {
         stage ('Checkout') {
           steps {
-            git 'https://github.com/effectivejenkins/spring-petclinic.git'
+            git 'https://github.com/cbabu85/effectivejenkins_SpringPetclinic.git'
           }
         }
         stage('Build') {
@@ -17,8 +17,8 @@ pipeline {
         stage('Deploy') {
           steps {
             input 'Do you approve the deployment?'
-            sh 'scp target/*.jar jenkins@192.168.50.10:/opt/pet/'
-            sh "ssh jenkins@192.168.50.10 'nohup java -jar /opt/pet/spring-petclinic-1.5.1.jar &'"
+            sh 'scp target/*.jar jenkins@34.126.89.141:/opt/pet/'
+            sh "ssh jenkins@34.126.89.141 'nohup java -jar /opt/pet/spring-petclinic-1.5.1.jar &'"
           }
         }
     }
