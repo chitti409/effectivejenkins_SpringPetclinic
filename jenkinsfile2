@@ -32,7 +32,7 @@ stage('Code Quality') {
             steps {
                 sh 'mvn clean package'
                 junit '**/target/surefire-reports/TEST-*.xml'
-                cobertura coberturaReportFile: 'target/cobertura-coverage.xml'
+                cobertura coberturaReportFile: '**/cobertura-coverage.xml'
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
         }
