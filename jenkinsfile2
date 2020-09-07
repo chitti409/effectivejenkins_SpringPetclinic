@@ -32,18 +32,18 @@ stage('Code Quality') {
             steps {
                 sh 'mvn clean package'
                 junit '**/target/surefire-reports/TEST-*.xml'
-                cobertura coberturaReportFile: '**/cobertura-coverage.xml'
+          //    cobertura coberturaReportFile: '**/cobertura-coverage.xml'
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
         }
         
           
-   //     stage('Deploy') {
- //         steps {
-   //         input 'Do you approve the deployment?'
-  //          sh 'scp target/*.jar jenkins@10.148.0.2:/opt/pet/'
-   //         sh "ssh jenkins@10.148.0.2 'nohup java -jar /opt/pet/spring-petclinic-1.5.1.jar &'"
-   //       }
-   //     }
+       stage('Deploy') {
+          steps {
+            input 'Do you approve the deployment?'
+            sh 'scp target/*.jar jenkins@10.148.0.15:/opt/pet/'
+            sh "ssh jenkins@10.148.0.15 'nohup java -jar /opt/pet/spring-petclinic-1.5.1.jar &'"
+          }
+        }
     }
 }
