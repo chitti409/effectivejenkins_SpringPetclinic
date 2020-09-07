@@ -41,8 +41,8 @@ stage('Code Quality') {
        stage('Deploy') {
           steps {
             input 'Do you approve the deployment?'
-            sh 'scp target/*.jar cbabu@34.126.89.141:/opt/pet/'
-            sh "ssh cbabu@34.126.89.141 'nohup java -jar /opt/pet/spring-petclinic-1.5.1.jar &'"
+            sh 'scp target/*.jar tomcat@34.126.89.141:/opt/pet'
+            sh "ssh tomcat@34.126.89.141 'nohup java -jar /opt/pet/spring-petclinic-1.5.1.jar &'"
           }
         }
     }
